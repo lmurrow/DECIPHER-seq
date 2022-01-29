@@ -1,0 +1,26 @@
+---
+title: "DECIPHER-seq"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data and code for "DECIPHER-seq uncovers cell-cell interaction networks in the human breast" (Murrow et al.)
+
+Included is the processed data and coded needed to replicate key findings from Murrow et al. Raw gene expression and barcode count matrices will be uploaded to the Gene Expression Omnibus (insert GEO ID here). Any additional information required to reproduce the data in this study is available from the corresponding authors upon request.
+
+```{r renv}
+renv::restore()
+```
+
+## Seurat pre-processing and cell type clustering
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
