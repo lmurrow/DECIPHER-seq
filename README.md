@@ -1,10 +1,11 @@
 Data and code for “DECIPHER-seq uncovers cell-cell interaction networks in the human breast” (Murrow et al.)
 ------------------------------------------------------------------------------------------------------------
 
-Included is the processed data and coded needed to replicate key
-findings from Murrow et al. Raw gene expression and barcode count
-matrices will be uploaded to the Gene Expression Omnibus (insert GEO ID
-here). Any additional information required to reproduce the data in this
+Included is the code needed to replicate key findings from Murrow et al. 
+Raw gene expression, barcode count matrices, and processed data will be 
+uploaded to the Gene Expression Omnibus (insert GEO ID here). 
+
+Any additional information required to reproduce the data in this
 study is available from the corresponding authors upon request.
 
 ``` r
