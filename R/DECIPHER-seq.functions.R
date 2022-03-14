@@ -15,7 +15,7 @@ iNMF_ksweep <- function(seurat.object, Type.thresh = 100, Sample.thresh = 10, Ba
     stop("n.reps or nn.pt too low to find consensus results")
   }
   library(rliger); library(Matrix); library(matrixStats); library(parallel); 
-  library(cluster); library(stats); library(rlist); library(liger)
+  library(cluster); library(stats); library(rlist); library(liger); library(RANN)
   
   # Process Seurat object and determine which cell types to analyze
   DefaultAssay(seurat.object)="RNA"
@@ -99,7 +99,7 @@ iNMF_ksweep <- function(seurat.object, Type.thresh = 100, Sample.thresh = 10, Ba
       kmeans_clusts = dim(W.mat)[1]/n.reps
       
       # find mean distance to nearest neighbors
-      nn.dist = rowMeans(nn2(as.matrix(W.mat), k = n.reps)$nn.dists[,c(1:round(n.reps*nn.pt))+1])
+      nn.dist = rowMeans(RANN::nn2(as.matrix(W.mat), k = n.reps)$nn.dists[,c(1:round(n.reps*nn.pt))+1])
       names(nn.dist) = rownames(W.mat)
       
       # filter outliers
