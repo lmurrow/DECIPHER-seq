@@ -48,6 +48,7 @@ iNMF_ksweep <- function(seurat.object, Type.thresh = 100, Sample.thresh = 10, Ba
         Liger <- createLiger(Liger.setup)
       } 
     } else {
+      seu_sub <- AddMetaData(seu_sub, col.name = 'Batch', metadata = 'Batch')
       Liger <- createLiger(list(Batch1 = seu_sub@assays$RNA@counts))
     }
     # normalize so all cells have same total counts
