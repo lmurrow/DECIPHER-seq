@@ -56,7 +56,7 @@ iNMF_ksweep <- function(seurat.object, Type.thresh = 100, Sample.thresh = 10, Ba
     Liger <- selectGenes(Liger)
     # log normalize (this combined with the normalize step above is the same as LogNormalize in Seurat)
     for (k in 1:length(Liger@norm.data)){
-      Liger@norm.data[[k]]=log1p(Liger@norm.data[[k]]*scale.factor)
+      Liger@norm.data[[k]]=as.sparse(as.matrix(log1p(Liger@norm.data[[k]]*scale.factor)))
     }
     # scale without centering
     Liger <- rliger::scaleNotCenter(Liger)
