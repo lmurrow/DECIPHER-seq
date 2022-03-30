@@ -286,7 +286,7 @@ calculate_K_metric <- function(clusters, K.max = NULL){
   df = subset(df, clust%ni%c("0", "outlier"))
   df = df[df$clust%in%names(which(table(df$clust)>=5)),]
   # weight subtrees by the total number of programs in that subtree
-  df$clust_weight = as.numeric(plyr::mapvalues(df$clust, from = names(table(df[,c("clust")])), to = table(df[,c("clust")])/40))
+  df$clust_weight = as.numeric(plyr::mapvalues(df$clust, from = names(table(df[,c("clust")])), to = table(df[,c("clust")])/(K.max - 1)))
   df$rank_clust = paste(df$rank, df$clust, sep = "_")
   # only count subtrees once
   df = df[-which(duplicated(df$rank_clust)),]
