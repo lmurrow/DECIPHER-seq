@@ -1,9 +1,8 @@
-Data and code for “DECIPHER-seq uncovers cell-cell interaction networks in the human breast” (Murrow et al.)
+Data and code for “Leveraging person-to-person heterogeneity to uncover hormone-regulated cell-cell interaction networks in the human breast” (Murrow et al.)
 ------------------------------------------------------------------------------------------------------------
 
-Included is the code needed to replicate key findings from Murrow et al. 
-Raw gene expression, barcode count matrices, and processed data will be 
-uploaded to the Gene Expression Omnibus (insert GEO ID here). 
+Included is the original code needed to replicate key findings from Murrow et al. 
+Raw FASTQ files, processed gene expression and barcode count matrices, and de-identified patient metadata have been deposited in the Gene Expression Omnibus at accession number GSE198732 and are publicly available as of the date of publication. 
 
 Any additional information required to reproduce the data in this
 study is available from the corresponding authors upon request.
