@@ -1,4 +1,4 @@
-Data and code for “Leveraging person-to-person heterogeneity to uncover hormone-regulated cell-cell interaction networks in the human breast” (Murrow et al.)
+Data and code for “Mapping hormone-regulated cell-cell interaction networks in the human breast at single-cell resolution” (Murrow et al.)
 ------------------------------------------------------------------------------------------------------------
 
 Included is the original code needed to replicate key findings from Murrow et al. 
