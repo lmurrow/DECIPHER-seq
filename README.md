@@ -7,6 +7,9 @@ Raw FASTQ files, processed gene expression and barcode count matrices, and de-id
 Any additional information required to reproduce the data in this
 study is available from the corresponding authors upon request.
 
+Note: Due to temporary issues with GitHub LFS, files in DECIPHER-seq/Data can be downloaded from the below link:
+<https://ucsf.box.com/s/znjdk8s8wy83doqaro0t6xxa3jqla6do>
+
 ``` r
 renv::restore()
 ```
