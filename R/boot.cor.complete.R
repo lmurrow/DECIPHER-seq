@@ -3,7 +3,7 @@ boot.cor.bca.complete <- function (x, y, null.hyp = NULL, alternative = c("two.s
                                    ncpus = 1) 
 {
   require(parallel)
-  require(wBoot)
+  require(boot)
   obs <- cor(x, y, use="pairwise.complete.obs")
   test <- !is.null(null.hyp)
   data <- data.frame(x, y)
