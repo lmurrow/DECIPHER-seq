@@ -30,6 +30,7 @@ iNMF_ksweep <- function(seurat.object, Type.thresh = 100, Sample.thresh = 10, Ba
     warning("Only one cell type met input Sample/Type thresholds")
   }
   print(paste0("Running consensus iNMF on the following ", length(cell.types), " cell types: ", paste(cell.types, collapse = ", ")))
+  gc()
   
   # SET UP LIGER OBJECTS AND RUN K SWEEP
   print(paste0('Creating Liger objects and running k sweep...'))
@@ -75,6 +76,7 @@ iNMF_ksweep <- function(seurat.object, Type.thresh = 100, Sample.thresh = 10, Ba
       print(paste0('Running K = ', k))
       reps.k = rep(k, n.reps)
       names(reps.k) = paste0("rep", 1:length(reps.k))
+      gc()
       Liger_list[[paste0("R", k)]] = mcmapply(LIGER.run, K = reps.k, Liger = c(Liger), 
                                             minibatch_size = minibatch_size, h5_chunk_size = h5_chunk_size,
                                             SIMPLIFY = F)
@@ -85,6 +87,7 @@ iNMF_ksweep <- function(seurat.object, Type.thresh = 100, Sample.thresh = 10, Ba
           colnames(y) = paste0("Rep", i, "_", colnames(y))
           return(y)})
       }
+      gc()
       print(paste0('Done with ', x, ' K = ', k))
     }
     
