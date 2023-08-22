@@ -318,13 +318,17 @@ NMF_results_opt_k <- function(NMF_results, k, out_score, outlier.thresh = 5) {
 }
 
 # Calculate each sample's average expression score for each program ###
-calc.H.score <- function(NMF_results, metadata){
+calc.H.score <- function(NMF_results, metadata, min.cells = 50){
   H_matrix <- NMF_results$H
   res = data.frame(matrix(nrow = length(unique(metadata$Sample)), ncol= ncol(H_matrix)))
   rownames(res) = unique(metadata$Sample)
   colnames(res) = colnames(H_matrix)
   for (i in unique(metadata$Sample)){
-    res[i,] = colMeans(H_matrix[intersect(rownames(H_matrix), rownames(subset(metadata, Sample==i))),])
+    if (length(intersect(rownames(H_matrix), rownames(subset(metadata, Sample==i))))>= min.cells){
+      res[i,] = colMeans(H_matrix[intersect(rownames(H_matrix), rownames(subset(metadata, Sample==i))),])
+    } else if (length(intersect(rownames(H_matrix), rownames(subset(metadata, Sample==i))))==1){
+      res[i,] = rep(NA, ncol(H_matrix))
+    }
   }
   return(res)
 }
