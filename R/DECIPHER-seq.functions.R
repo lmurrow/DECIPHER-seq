@@ -584,26 +584,29 @@ combine_marker_matrices <- function(marker_gene_matrix){
 
 # Run fgsea, combine results, and calculate fdr ####
 
-fgsea_test <- function(marker_gene_list, Network, path_list){
+fgsea_test <- function(marker_gene_list, Network, path_list, ncores){
+  for (i in names(marker_gene_list)){
+    marker_gene_list[[i]] <- marker_gene_list[[i]][,paste(i, colnames(marker_gene_list[[i]]), sep = ".")%in%names(Network$filtered_modules)]
+  }
   res = mclapply(marker_gene_list, function(marker_gene_matrix){
     res_list = apply(marker_gene_matrix, 2, function(x){
       Program_test = as.numeric(x)
       names(Program_test) = rownames(marker_gene_matrix)
       res = fgsea(pathways = path_list, stats = Program_test, 
-                  minSize=10, maxSize=Inf, eps=1e-50, nPermSimple=100000)
+                  minSize=10, maxSize=Inf, eps=1e-50, nPermSimple=10000)
     })
     res_mat = list.rbind(res_list)
-    n_pathways = length(path_list)
+    n_pathways = dim(res_list[[1]])[1]
     res_mat$Program = rep(colnames(marker_gene_matrix), each = n_pathways)
     return(res_mat)
-  }, mc.cores = min(detectCores(), length(marker_gene_list)))
+  }, mc.cores = ncores)
   for (i in names(res)){
     res[[i]]$Type = i
   }
   res = list.rbind(res)
   res$module = paste0(res$Type, "." , res$Program)
-  res$module = plyr::mapvalues(res$module, from = names(Network$modules), to = Network$modules)
-  res = subset(res, module%in%unique(Network$filtered_modules))
+  res$module = plyr::mapvalues(res$module, from = names(Network$filtered_modules)[names(Network$filtered_modules)%in%res$module], 
+                               to = Network$filtered_modules[names(Network$filtered_modules)%in%res$module])
   res$fdr = p.adjust(res$pval, method = "fdr")
   return(res)
 }
