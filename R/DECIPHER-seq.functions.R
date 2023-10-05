@@ -483,7 +483,7 @@ Permutation_test_gene_cor <- function(Network, gene_correlation_matrix, reps = 1
   for (node in colnames(gene_correlation_matrix)){
     module = Network$filtered_modules[node]
     temp = mean(gene_correlation_matrix[names(which(Network$filtered_modules == module)), node], na.rm = T)
-    node_pval[node] = sum(temp > permutation_res[paste0("Module_", module),])/length(permutation_res[paste0("Module_", module),])
+    node_pval[node] = sum(temp < permutation_res[paste0("Module_", module),])/reps
   }
   node_pval[node_pval==0]=1/reps
   return(node_pval)
